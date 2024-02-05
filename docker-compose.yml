@@ -11,3 +11,16 @@ services:
       - MEILI_NO_ANALYTICS=true
     volumes:
       - ${APP_ROOT}/db:/meili_data
+
+  scraper:
+    image: getmeili/docs-scraper:latest
+    command: pipenv run ./docs_scraper config.json
+    profiles: ["scrape"]
+    environment:
+      - MEILISEARCH_HOST_URL=http://app:7700
+      - MEILISEARCH_API_KEY=$MEILI_MASTER_KEY
+    volumes:
+      - ./scrape-sample.json:/docs-scraper/config.json
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/ssl/certs:/etc/ssl/certs:ro

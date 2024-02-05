@@ -1,0 +1,25 @@
+{
+  "index_uid": "dcape",
+  "start_urls": [
+    "https://dopos.github.io/"
+  ],
+  "sitemap_urls": [
+    "https://dopos.github.io/sitemap.xml"
+  ],
+  "stop_urls": [],
+  "selectors": {
+    "lvl0": {
+      "selector": "h1",
+      "global": true,
+      "default_value": "Documentation"
+    },
+    "lvl1": {
+      "selector": "h2.title",
+      "global": true,
+      "default_value": "Chapter"
+    },
+    "lvl2": "h2",
+    "lvl3": "h3",
+    "text": "p, li"
+  }
+}

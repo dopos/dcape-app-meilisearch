@@ -59,7 +59,12 @@ use-template:
 prep:
 	@echo "Just to show we able to attach"
 
+## Show server keys
 show-keys:
 	curl \
   -X GET 'https://$(APP_SITE)/keys' \
   -H 'Authorization: Bearer $(MEILI_MASTER_KEY)' | jq '.'
+
+## Update search index
+scrape: CMD=--profile scrape run -t --rm scraper
+scrape: dc
