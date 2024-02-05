@@ -7,19 +7,19 @@ CFG                ?= .env
 CFG_BAK            ?= $(CFG).bak
 
 #- App name
-APP_NAME           ?= service-template
+APP_NAME           ?= search
 
 #- Docker image name
-IMAGE              ?= ghcr.io/lekovr/service-template
+IMAGE              ?= getmeili/meilisearch
 
 #- Docker image tag
-IMAGE_VER          ?= 0.1.0
+IMAGE_VER          ?= v1.6.1
 
-# If you need database, uncomment this var
-#USE_DB              = yes
+#- Master key
+MEILI_MASTER_KEY   ?= $(shell openssl rand -hex 16; echo)
 
-# If you need user name and password, uncomment this var
-#ADD_USER            = yes
+#- app root
+APP_ROOT           ?= $(PWD)
 
 # ------------------------------------------------------------------------------
 
@@ -58,3 +58,8 @@ use-template:
 
 prep:
 	@echo "Just to show we able to attach"
+
+show-keys:
+	curl \
+  -X GET 'https://$(APP_SITE)/keys' \
+  -H 'Authorization: Bearer $(MEILI_MASTER_KEY)' | jq '.'

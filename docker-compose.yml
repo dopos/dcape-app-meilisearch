@@ -5,5 +5,9 @@ services:
   # This service will extend code from dcape
   app:
     environment:
-      # Some var to keep YML struct
-      - DEBUG=yes
+      # See https://www.meilisearch.com/docs/learn/configuration/instance_options
+      - MEILI_ENV=production
+      - MEILI_MASTER_KEY
+      - MEILI_NO_ANALYTICS=true
+    volumes:
+      - ${APP_ROOT}/db:/meili_data
